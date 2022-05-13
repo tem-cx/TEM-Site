@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="topbar">
+            <h1 class="LOGO">TEM</h1>
+            <input type="text" name="projectname" id="projectname" class="projectname" placeholder="Items And Players" required>
+            <button type="submit" class="editbutton">Go</button>
+
+    </div>
+
+    <div class="main">
+
+    </div>
+    
+</div>
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,600&family=Montserrat&display=swap');
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      white-space: normal;
+    }
+
+    body{
+        background-color: #2C394B;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .topbar{
+        background-color: #082032;
+        height: 5rem;
+        width: 100%;
+        position: fixed;
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;    }
+    .logo{
+        position: absolute;
+        font-family: 'jetbrains mono', monospace;
+        font-size: 4rem;
+        color: #FF4C29;
+        padding-left: 2rem;
+        text-shadow: 3px 4px 7px #1b1b1b;
+    }
+
+    input{
+        position: absolute;
+        width: 25%;
+        height: 3rem;
+        border-radius: 5px;
+        border: 0.2rem solid #EEEEEE;
+        margin-top: 1rem;
+        right: 10rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        color: #EEEEEE;
+        outline: none;
+        padding: 0.5vh;
+        background-color: transparent;
+    }
+    input:focus{
+        border: 0.2rem solid #FF4C29;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    button {
+        top: 1.2rem;
+        right: 2.3rem;
+        position: absolute;
+        background-color: #334756;
+        border-radius: 5px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #EEEEEE;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1em;
+        font-weight: 500;
+        height: 2.5rem;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        outline: none;
+        padding: 1vh 1.5vw;
+        text-align: center;
+        text-decoration: none;
+        transition: color 100ms;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        transition: all 0.2s ease-in-out;
+    }
+
+    button:hover{
+        background-color: #FF4C29;
+    }
+
+
+</style>
