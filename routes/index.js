@@ -2,10 +2,12 @@ const { Router } = require('express')
 
 
 const home = require('./home/home')
+const item = require('./items/item')
 
 const router = Router()
 
 router.use('/', home)
+router.use('/items/', item)
 
 
 router.get('*', (req, res) => {
