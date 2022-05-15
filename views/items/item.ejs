@@ -2,6 +2,8 @@
 <html>
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
         <style>html{visibility: hidden;opacity:0;}</style>
 
     </head>
@@ -91,7 +93,6 @@
         for(i in ownerList){
             let playerName = await getPlayerName(ownerList[i].playerUuid)
             console.log(playerName)
-
             var img = document.createElement('img')
             var pName = document.createElement('p')
             var pStart = document.createElement('p')
@@ -124,13 +125,9 @@
             document.getElementById([i]).appendChild(startSpan);
             document.getElementById([i]).appendChild(endSpan);
         }
-        
         var bmargin = document.createElement('div')
         bmargin.className = 'bmargin'
-        document.getElementById('history').appendChild(bmargin)
-
-
-        
+        document.getElementById('history').appendChild(bmargin)  
     }
 
 
