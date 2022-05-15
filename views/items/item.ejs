@@ -6,7 +6,6 @@
 
     </head>
     <body onload="writeItem()">
-        <div class="container">
             <div class="topbar">
                     <img src="https://i.imgur.com/UUFNpMd.png" class="TEM" style="width:13rem;">
                     <form action="/" method="POST">
@@ -21,16 +20,18 @@
             </div>
         
             <div class="main">
-                <div id="pheads">
+                <div class="history" id="history">
 
+                    <h1 class="historyTitle"><span class="material-icons">history</span>Owner History</h1>
 
+                    
+                    <div class="bmargin"></div>
                 </div>
-                
-            
-            
+                <div class="vline"></div>
+
             </div>
 
-        </div>
+                
     </body>
 </html>
 
@@ -51,6 +52,14 @@
                     item = response.data
                 })
             return item
+    }
+
+    async function getPlayerName(id) {
+        let playerName = ''
+        await axios.get('https://mc-heads.net/minecraft/profile/' + id).then(function (response) {
+            playerName = response.data
+        })
+        return playerName
     }
 
     async function writeItem(){
@@ -75,14 +84,51 @@
         ownerList.push(obj)
         ownerList.reverse()
         
+        console.log(item)
         
         console.log(ownerList)
 
         for(i in ownerList){
+            let playerName = await getPlayerName(ownerList[i].playerUuid)
+            console.log(playerName)
+
             var img = document.createElement('img')
-            img.src = 'https://mc-heads.net/avatar/' + ownerList[i].playerUuid
-            document.getElementById('pheads').appendChild(img);
+            var pName = document.createElement('p')
+            var pStart = document.createElement('p')
+            var pEnd = document.createElement('p')
+            var div = document.createElement('div')
+            var endSpan = document.createElement('span')
+            var startSpan = document.createElement('span')
+            var href = document.createElement('a')
+            pStart.innerHTML = ownerList[i].startDate
+            pEnd.innerHTML = ownerList[i].endDate
+            endSpan.className = 'material-icons-outlined'
+            endSpan.innerHTML = 'file_upload'
+            startSpan.className = 'material-icons-outlined'
+            startSpan.innerHTML = 'file_download'
+            startSpan.id = 'startspan'
+            endSpan.id = 'endspan'
+            pStart.id = 'start'
+            pEnd.id = 'end'
+            div.id = [i]
+            pName.innerHTML = playerName.name
+            href.href = 'https://sky.shiiyu.moe/stats/' + playerName.name
+            href.id = 'href' + [i]
+            img.src = 'https://mc-heads.net/avatar/' + ownerList[i].playerUuid 
+            document.getElementById('history').appendChild(div)
+            document.getElementById([i]).appendChild(href)
+            document.getElementById('href' + [i]).appendChild(img);
+            document.getElementById([i]).appendChild(pName);
+            document.getElementById([i]).appendChild(pEnd);
+            document.getElementById([i]).appendChild(pStart);
+            document.getElementById([i]).appendChild(startSpan);
+            document.getElementById([i]).appendChild(endSpan);
         }
+        
+        var bmargin = document.createElement('div')
+        bmargin.className = 'bmargin'
+        document.getElementById('history').appendChild(bmargin)
+
 
         
     }
@@ -102,6 +148,7 @@
   padding: 0;
   white-space: normal;
   transition: all 0.2s ease-in-out;
+  overflow: hidden;
 }
 body{
     background-color: #232931;
@@ -122,7 +169,8 @@ body{
 }
 input{
     position: relative;
-    width: 100%;
+    width: 60%;
+    left: 17rem;
     height: 2.5rem;
     border-radius: 10px;
     font-family: 'Montserrat', sans-serif;
@@ -133,27 +181,14 @@ input{
     padding-left: 5vh;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    
 }
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-    -webkit-text-fill-color: #EEEEEE;
-    transition: background-color 500000s ease-in-out 0s;
-}
-
 
 input:hover , input:focus{
     transition: all 0.2s ease-in-out;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
 }
+
 .topbar input::placeholder{
     color: #EEEEEE;
 }
@@ -166,8 +201,8 @@ input:hover , input:focus{
 }
 .searchbar{
     position: absolute;
-    width: 25%;
-    height: 2.5rem;
+    width: 40%;
+    height: 10.5rem;
     margin-top: 1.3rem;
     right: 10rem;
 }
@@ -208,6 +243,151 @@ button:hover{
 }
 
 /* Main */
+
+.main{
+    position: absolute;
+    top: 5rem;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    
+}
+
+
+
+/* history */
+
+.history{
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    right: 0;
+    overflow-y: auto;
+
+
+}
+
+.history div:not(.vline,.bmargin){
+    position: relative;
+    display: block;
+    top: 0rem;
+    padding-left: 1.5vw;
+    margin-right: -1rem;
+    padding-top: 1.5rem;
+    margin-left: 3rem;
+    margin-top: 5rem;
+    border-radius: 10px;
+    background-color: #393E46;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.history div:not(.vline):hover{
+    transition: all 0.2s ease-in-out;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.history div img{
+    width: 8rem;
+    border-radius: .5rem;
+
+}
+
+.history div p{
+    position: relative;
+    top: -7rem;
+    left: 10rem;
+    font-size: 2rem;
+    font-weight: 750;
+    color: #4ECCA3;
+}
+#start{
+    position: absolute;
+    padding-top: 13.5rem;
+    left: 30rem;
+    font-size: 1.5rem;
+    font-weight: 750;
+    color: #4ECCA3;
+}
+#end{
+    position: absolute;
+    padding-top: 10rem;
+    left: 30rem;
+    font-size: 1.5rem;
+    font-weight: 750;
+    color: #4ECCA3;
+}
+
+
+
+.vline{
+    overflow-y: hidden;
+    position: absolute;
+    display: inline;
+    width: 0.1rem;
+    height: inherit;
+    background-color: #393E46;
+    right: 40%;
+    overflow-y: hidden;
+}
+
+.historytitle{
+    position: absolute;
+    left: 17rem;
+    top: 1rem;
+    font-size: 2rem;
+    font-weight: 1000;
+    color: #EEEEEE;
+}
+#startspan{
+    position: absolute;
+    top: 5.4rem;
+    right: 6rem;
+    font-size: 2rem;
+    font-weight: 750;
+    color: #EEEEEE;
+}
+#endspan{
+    position: absolute;
+    top: 1.8rem;
+    right: 6rem;
+    font-size: 2rem;
+    font-weight: 750;
+    color: #EEEEEE;
+
+}
+
+.bmargin{
+    position: absolute;
+    height: 10rem;
+    width: 100%;
+    align-self: bottom;
+}
+
+
+/* Footer */
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #4ECCA3 #ffffff5c;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff00;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #4ECCA3;
+    border-radius: 18px;
+    border: 4px solid #ffffff00;
+  }
+
 
 html {
     visibility: visible;
