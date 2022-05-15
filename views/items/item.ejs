@@ -2,22 +2,30 @@
 <html>
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>html{visibility: hidden;opacity:0;}</style>
 
     </head>
-    <body>
+    <body onload="writeItem()">
         <div class="container">
             <div class="topbar">
                     <img src="https://i.imgur.com/UUFNpMd.png" class="TEM" style="width:13rem;">
                     <form action="/" method="POST">
-                        <input type="text" name="search" id="search" class="search" placeholder="Items And Players" value="<%=search%>" required>
+                        <div class="searchbar">
+                            <input type="text" name="search" id="search" class="search" placeholder="Items And Players" value="<%=search%>" required>
+                            <span class="material-icons">search</span>
+                        </div>
                         <button type="submit" class="submit">Search</button>
                     </form>
-                    <span class="material-icons">search</span>
+                    
                 
             </div>
         
             <div class="main">
-            
+                <div id="pheads">
+
+
+                </div>
+                
             
             
             </div>
@@ -25,6 +33,64 @@
         </div>
     </body>
 </html>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    
+
+    var itemOptions = {
+            method: 'GET',
+            url: 'https://api.tem.cx/items/' + '<%=search%>',
+            headers: {'Content-Type': 'application/json'}
+        };
+
+    async function getItem() {
+            let item = ''
+                await axios.request(itemOptions).then(function (response) {
+                    item = response.data
+                })
+            return item
+    }
+
+    async function writeItem(){
+        const item = await getItem()
+
+        ownerList = []
+        previousOwners = item.item.previousOwners
+
+        for(i in previousOwners){
+            var obj = {}
+            var startDateConvert = new Date(previousOwners[i].start)
+            var endDateConvert = new Date(previousOwners[i].end)
+            obj.startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
+            obj.endDate = endDateConvert.getDate() + '/' + (endDateConvert.getMonth() + 1) + '/' + (endDateConvert.getFullYear())
+            obj.playerUuid = previousOwners[i].owner.playerUuid
+            ownerList.push(obj)
+        }
+        var obj = {}
+        obj.startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
+        obj.endDate = 'Present'
+        obj.playerUuid = item.item.currentOwner.playerUuid
+        ownerList.push(obj)
+        ownerList.reverse()
+        
+        
+        console.log(ownerList)
+
+        for(i in ownerList){
+            var img = document.createElement('img')
+            img.src = 'https://mc-heads.net/avatar/' + ownerList[i].playerUuid
+            document.getElementById('pheads').appendChild(img);
+        }
+
+        
+    }
+
+
+</script>
+
+
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,600&family=Montserrat&display=swap');
@@ -55,12 +121,10 @@ body{
     top: -4rem;
 }
 input{
-    position: absolute;
-    width: 25%;
+    position: relative;
+    width: 100%;
     height: 2.5rem;
     border-radius: 10px;
-    margin-top: 1.3rem;
-    right: 10rem;
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     color: #EEEEEE;
@@ -69,7 +133,23 @@ input{
     padding-left: 5vh;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #EEEEEE;
+    transition: background-color 500000s ease-in-out 0s;
+}
+
+
 input:hover , input:focus{
     transition: all 0.2s ease-in-out;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
@@ -78,11 +158,18 @@ input:hover , input:focus{
     color: #EEEEEE;
 }
 .topbar span{
-    position: absolute;
-    right: 37.5rem;
-    top: 1.65rem;
+    position: relative;
+    top: -2.1rem;
+    left: 0.7rem;
     font-size: 1.9rem;
     color: #EEEEEE;
+}
+.searchbar{
+    position: absolute;
+    width: 25%;
+    height: 2.5rem;
+    margin-top: 1.3rem;
+    right: 10rem;
 }
 button {
     top: 1.3rem;
@@ -118,6 +205,13 @@ button:hover{
     background-color: #4ECCA3;
     color: #232931;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+/* Main */
+
+html {
+    visibility: visible;
+    opacity: 1;
 }
 
 </style>
