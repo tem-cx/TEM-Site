@@ -26,7 +26,7 @@ To install navigate into the main folder and run the command :
 > npm i
 ```
 Create a .env file with a variable called :
-```bash
+```javascript
 SESSION_SECRET=[Your Secret Here]
 ```
 This can be whatever you want
