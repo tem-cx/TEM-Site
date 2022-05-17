@@ -1,7 +1,5 @@
-if (process.env.NODE !== 'production') {
-    require('dotenv').config()
-  }
-  
+  require('dotenv').config()
+
   const express = require('express')
   const app = express()
   const session = require('express-session')
