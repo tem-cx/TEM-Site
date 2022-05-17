@@ -11,10 +11,8 @@
             <div class="topbar">
                     <img src="https://i.imgur.com/UUFNpMd.png" class="TEM" style="width:13rem;">
                     <form action="/" method="POST">
-                        <div class="searchbar">
                             <input type="text" name="search" id="search" class="search" placeholder="Items And Players" value="<%=search%>" required>
                             <span class="material-icons">search</span>
-                        </div>
                         <button type="submit" class="submit">Search</button>
                     </form>
                     
@@ -24,7 +22,7 @@
             <div class="main">
                 <div class="history" id="history">
 
-                    <h1 class="historyTitle"><span class="material-icons">history</span>Owner History</h1>
+                    <h1 class="historyTitle">Owner History</h1>
 
                     
                     <div class="bmargin"></div>
@@ -98,17 +96,9 @@
             var pStart = document.createElement('p')
             var pEnd = document.createElement('p')
             var div = document.createElement('div')
-            var endSpan = document.createElement('span')
-            var startSpan = document.createElement('span')
             var href = document.createElement('a')
-            pStart.innerHTML = ownerList[i].startDate
-            pEnd.innerHTML = ownerList[i].endDate
-            endSpan.className = 'material-icons-outlined'
-            endSpan.innerHTML = 'file_upload'
-            startSpan.className = 'material-icons-outlined'
-            startSpan.innerHTML = 'file_download'
-            startSpan.id = 'startspan'
-            endSpan.id = 'endspan'
+            pStart.innerHTML = ownerList[i].startDate + '<span class="material-icons-outlined">file_download</span>'
+            pEnd.innerHTML = ownerList[i].endDate + '<span class="material-icons-outlined">file_upload</span>'
             pStart.id = 'start'
             pEnd.id = 'end'
             div.id = [i]
@@ -122,8 +112,6 @@
             document.getElementById([i]).appendChild(pName);
             document.getElementById([i]).appendChild(pEnd);
             document.getElementById([i]).appendChild(pStart);
-            document.getElementById([i]).appendChild(startSpan);
-            document.getElementById([i]).appendChild(endSpan);
         }
         var bmargin = document.createElement('div')
         bmargin.className = 'bmargin'
@@ -166,8 +154,7 @@ body{
 }
 input{
     position: relative;
-    width: 60%;
-    left: 17rem;
+    width: 30rem;
     height: 2.5rem;
     border-radius: 10px;
     font-family: 'Montserrat', sans-serif;
@@ -189,20 +176,24 @@ input:hover , input:focus{
 .topbar input::placeholder{
     color: #EEEEEE;
 }
-.topbar span{
-    position: relative;
-    top: -2.1rem;
-    left: 0.7rem;
-    font-size: 1.9rem;
-    color: #EEEEEE;
-}
-.searchbar{
+
+.search{
     position: absolute;
-    width: 40%;
-    height: 10.5rem;
-    margin-top: 1.3rem;
-    right: 10rem;
+    right: 11rem;
+    top: 1.3rem;
+    padding: 1rem;
 }
+
+.topbar span{
+    float: right;
+    margin-right: 12rem;
+    margin-top: 1.6rem;
+    position: relative;
+    z-index: 2;
+    color: #EEEEEE;
+    font-size: 2rem;
+}
+
 button {
     top: 1.3rem;
     right: 1.5rem;
@@ -315,6 +306,22 @@ button:hover{
 }
 
 
+#start span{
+    position: relative;
+    color: #EEEEEE;
+    font-size: 2rem;
+    top: 0.3rem;
+    left: 0.2rem;
+}
+
+#end span{
+    position: relative;
+    color: #EEEEEE;
+    font-size: 2rem;
+    top: 0.3rem;
+    left: 0.2rem;
+}
+
 
 .vline{
     overflow-y: hidden;
@@ -335,23 +342,10 @@ button:hover{
     font-weight: 1000;
     color: #EEEEEE;
 }
-#startspan{
-    position: absolute;
-    top: 5.4rem;
-    right: 6rem;
-    font-size: 2rem;
-    font-weight: 750;
-    color: #EEEEEE;
-}
-#endspan{
-    position: absolute;
-    top: 1.8rem;
-    right: 6rem;
-    font-size: 2rem;
-    font-weight: 750;
-    color: #EEEEEE;
 
-}
+
+
+
 
 .bmargin{
     position: absolute;
