@@ -26,7 +26,7 @@ To install navigate into the main folder and run the command :
 > npm i
 ```
 Create a .env file with a variable called :
-```javascript
+```bash
 SESSION_SECRET=[Your Secret Here]
 ```
 This can be whatever you want
@@ -34,7 +34,7 @@ This can be whatever you want
 ## Usage
 
 To run the website use the command:
-```javascript
+```bash
 > npm run dev
 ```
 
