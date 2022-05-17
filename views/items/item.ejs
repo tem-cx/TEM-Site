@@ -7,19 +7,32 @@
         <style>html{visibility: hidden;opacity:0;}</style>
 
     </head>
-    <body onload="writeItem()">
+    <body onload="getItemInfo();writeItem()">
             <div class="topbar">
-                    <img src="https://i.imgur.com/UUFNpMd.png" class="TEM" style="width:13rem;">
+                    <img src="https://i.imgur.com/UUFNpMd.png" class="TEM" style="width:13rem;" draggable="false">
                     <form action="/" method="POST">
                             <input type="text" name="search" id="search" class="search" placeholder="Items And Players" value="<%=search%>" required>
                             <span class="material-icons">search</span>
                         <button type="submit" class="submit">Search</button>
                     </form>
-                    
                 
             </div>
         
             <div class="main">
+                <div class="Item">
+                    <div class="itemdiscription">
+
+
+                    </div>
+                    <h1 class="etitle">Owner History</h1>
+
+                    <div class="enchantments">
+
+                    </div>
+                </div>
+
+                <div class="vline"></div>
+
                 <div class="history" id="history">
 
                     <h1 class="historyTitle">Owner History</h1>
@@ -27,7 +40,6 @@
                     
                     <div class="bmargin"></div>
                 </div>
-                <div class="vline"></div>
 
             </div>
 
@@ -62,6 +74,36 @@
         return playerName
     }
 
+    async function getItemInfo(){
+        const item = await getItem()
+        const itemInfo = item.item
+        const itemName = itemInfo.itemId
+        const enchantments = itemInfo.enchantments
+
+        var itemImg = document.createElement('img')
+        itemImg.src = 'https://sky.shiiyu.moe/item/' + itemName
+        itemImg.className = 'itemImg'
+        document.getElementsByClassName('Item')[0].appendChild(itemImg)
+
+        for(i in enchantments){
+            console.log(i)
+            console.log(enchantments[i])
+            var enchantment = document.createElement("p")
+            var enchantmentLevel = document.createElement("p")
+            enchantmentLevel.innerHTML = enchantments[i]
+            enchantmentLevel.className = 'enchantmentLevel'
+            enchantment.className = 'enchantment'
+            enchantment.id = i = i.replace('_', ' ')
+            //i = i.replace('_', ' ')
+            enchantment.innerHTML = i + ': '
+            document.getElementsByClassName('enchantments')[0].appendChild(enchantment)
+            document.getElementById(i).appendChild(enchantmentLevel)
+
+
+
+        }
+    }
+
     async function writeItem(){
         const item = await getItem()
 
@@ -87,7 +129,6 @@
 
         for(i in ownerList){
             let playerName = await getPlayerName(ownerList[i].playerUuid)
-            console.log(playerName)
             var img = document.createElement('img')
             var pName = document.createElement('p')
             var pStart = document.createElement('p')
@@ -144,10 +185,21 @@ body{
     position: fixed;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;    
 }
+
+.Item{
+    position: absolute;
+    width: 60%;
+    height: 100%;
+
+}
 .tem{
     position: fixed;
     padding-left: 2rem;
     top: -4rem;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none; 
 }
 input{
     position: relative;
@@ -248,8 +300,7 @@ button:hover{
     height: 100%;
     right: 0;
     overflow-y: auto;
-
-
+    overflow-x: auto;
 }
 
 .history div:not(.vline,.bmargin){
@@ -266,7 +317,7 @@ button:hover{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.history div:not(.vline):hover{
+.history div:not(.vline,.bmargin):hover{
     transition: all 0.2s ease-in-out;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
@@ -349,6 +400,56 @@ button:hover{
     height: 10rem;
     width: 100%;
     align-self: bottom;
+}
+
+/* items */
+
+.enchantments{
+    position: absolute;
+    top: 22.5vh;
+    right: 1vw;
+    width:35%;
+    height: 71%;
+    border-radius: 15px;
+    overflow-y: auto;
+    overflow-x: auto;
+    background-color: #393E46;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.enchantments:hover{
+    transition: all 0.2s ease-in-out;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.enchantment{
+    position: relative;
+    display: block;
+    text-align: right;
+    padding-right: 10rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #EEEEEE;
+    margin-top: 0.5rem;
+}
+.enchantmentLevel{
+    position: relative;
+    display: block;
+    bottom: 1.7rem;
+    left: 1.5rem;
+    margin-top: -0rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #4ECCA3;
+}
+
+.etitle{
+    position: absolute;
+    left: 42.5vw;
+    top: 14vh;
+    font-size: 2rem;
+    font-weight: 1000;
+    color: #EEEEEE;
 }
 
 

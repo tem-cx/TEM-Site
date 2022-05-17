@@ -1,5 +1,3 @@
-const axios = require('axios').default;
-
 exports.getItems = async (req, res) => {
     const params = req.params
 
