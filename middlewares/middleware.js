@@ -1,5 +1,10 @@
+require('dotenv').config()
+
 exports.checkHttps = (req, res, next) => {
-    if(req.protocol !== 'https') {
+    if(process.env.PRODUCTION !== 'true'){
+        return next()
+    }
+    else if(req.protocol !== 'https') {
         return res.redirect('https://' + req.headers.host + req.url)
     }
 }
