@@ -4,10 +4,12 @@ const { Router } = require('express')
 const home = require('./home/home')
 const item = require('./items/item')
 
+const {checkHttps} = require('../middlewares/middleware')
+
 const router = Router()
 
-router.use('/', home)
-router.use('/items/', item)
+router.use('/',checkHttps, home)
+router.use('/items/',checkHttps, item)
 
 
 router.get('*', (req, res) => {
