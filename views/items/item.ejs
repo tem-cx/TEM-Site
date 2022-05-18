@@ -116,10 +116,8 @@
         ownerList = []
         previousOwners = item.item.previousOwners
 
-        console.log(previousOwners.length)
 
         if(previousOwners.length === 0){
-                console.log('no previous owners')
                 var startDateConvert = new Date(item.item.created_at)
                 let startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
                 let owneruuid = item.item.currentOwner.playerUuid
