@@ -34,8 +34,13 @@ This can be whatever you want
 ## Usage
 
 To run the website use the command:
-```javascript
+```bash
 > npm run dev
+```
+
+Or alternatively:
+```javascript
+> node server.js
 ```
 
 ## Contributing
