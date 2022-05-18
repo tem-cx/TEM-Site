@@ -24,9 +24,9 @@
 
 
                     </div>
-                    <h1 class="etitle">Item Enchants</h1>
+                    <h1 class="etitle" id="etitle">Item Enchants</h1>
 
-                    <div class="enchantments">
+                    <div class="enchantments" id="ebox">
 
                     </div>
                 </div>
@@ -85,9 +85,15 @@
         itemImg.className = 'itemImg'
         document.getElementsByClassName('Item')[0].appendChild(itemImg)
 
+        if(Object.keys(enchantments).length === 0){
+            const ebox = document.getElementById('ebox')
+            const etitle = document.getElementById('etitle')
+            ebox.remove()
+            etitle.remove()
+            return
+        }
+
         for(i in enchantments){
-            console.log(i)
-            console.log(enchantments[i])
             var enchantment = document.createElement("p")
             var enchantmentLevel = document.createElement("p")
             enchantmentLevel.innerHTML = enchantments[i]
@@ -110,21 +116,62 @@
         ownerList = []
         previousOwners = item.item.previousOwners
 
-        for(i in previousOwners){
-            var obj = {}
-            var startDateConvert = new Date(previousOwners[i].start)
-            var endDateConvert = new Date(previousOwners[i].end)
-            obj.startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
-            obj.endDate = endDateConvert.getDate() + '/' + (endDateConvert.getMonth() + 1) + '/' + (endDateConvert.getFullYear())
-            obj.playerUuid = previousOwners[i].owner.playerUuid
-            ownerList.push(obj)
+        console.log(previousOwners.length)
+
+        if(previousOwners.length === 0){
+                console.log('no previous owners')
+                var startDateConvert = new Date(item.item.created_at)
+                let startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
+                let owneruuid = item.item.currentOwner.playerUuid
+                let playerName = await getPlayerName(owneruuid)
+
+                var img = document.createElement('img')
+                var pName = document.createElement('p')
+                var pStart = document.createElement('p')
+                var pEnd = document.createElement('p')
+                var div = document.createElement('div')
+                var href = document.createElement('a')
+
+                pStart.innerHTML = startDate + '<span class="material-icons-outlined">file_download</span>'
+                pEnd.innerHTML = 'Not Been Traded' + '<span class="material-icons-outlined">file_upload</span>'
+                pStart.id = 'start'
+                pEnd.id = 'end'
+                div.id = 'owner'
+                pName.innerHTML = playerName.name
+                href.href = 'https://sky.shiiyu.moe/stats/' + playerName.name
+                href.id = 'href'
+                img.src = 'https://mc-heads.net/avatar/' + owneruuid
+
+                document.getElementById('history').appendChild(div)
+                document.getElementById('owner').appendChild(href)
+                document.getElementById('href').appendChild(img);
+                document.getElementById('owner').appendChild(pName);
+                document.getElementById('owner').appendChild(pEnd);
+                document.getElementById('owner').appendChild(pStart);
+            
+                var bmargin = document.createElement('div')
+                bmargin.className = 'bmargin'
+                document.getElementById('history').appendChild(bmargin)  
         }
-        var obj = {}
-        obj.startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
-        obj.endDate = 'Present'
-        obj.playerUuid = item.item.currentOwner.playerUuid
-        ownerList.push(obj)
-        ownerList.reverse()
+
+    
+        else{
+            for(i in previousOwners){
+                var obj = {}
+                var startDateConvert = new Date(previousOwners[i].start)
+                var endDateConvert = new Date(previousOwners[i].end)
+                obj.startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
+                obj.endDate = endDateConvert.getDate() + '/' + (endDateConvert.getMonth() + 1) + '/' + (endDateConvert.getFullYear())
+                obj.playerUuid = previousOwners[i].owner.playerUuid
+                ownerList.push(obj)
+            }
+            var obj = {}
+            obj.startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
+            obj.endDate = 'Present'
+            obj.playerUuid = item.item.currentOwner.playerUuid
+            ownerList.push(obj)
+            ownerList.reverse()
+        }
         
 
         for(i in ownerList){
@@ -154,6 +201,7 @@
         var bmargin = document.createElement('div')
         bmargin.className = 'bmargin'
         document.getElementById('history').appendChild(bmargin)  
+        
     }
 
 
