@@ -1,5 +1,6 @@
 
-<html>
+<html >
+
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -7,7 +8,12 @@
         <style>html{visibility: hidden;opacity:0;}</style>
 
     </head>
-    <body onload="getItemInfo();writeItem()">
+
+    <script>
+
+    </script>
+
+    <body onload="getItemInfo();writeItem(),httpscheck()">
             <div class="topbar">
                     <img src="https://i.imgur.com/UUFNpMd.png" class="TEM" style="width:13rem;" draggable="false">
                     <form action="/" method="POST">
@@ -51,12 +57,17 @@
 
 <script>
     
+    async function httpscheck() {
+            console.log("httpscheck");
+            if (window.location.protocol != "https:")
+                window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+    }
 
     var itemOptions = {
             method: 'GET',
             url: 'https://api.tem.cx/items/' + '<%=search%>',
             headers: {'Content-Type': 'application/json'}
-        };
+    }
 
     async function getItem() {
             let item = ''
