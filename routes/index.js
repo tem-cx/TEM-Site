@@ -8,8 +8,8 @@ const {checkHttps} = require('../middlewares/middleware')
 
 const router = Router()
 
-router.use('/',checkHttps, home)
-router.use('/items/',checkHttps, item)
+router.use('/', home)
+router.use('/items/', item)
 
 
 router.get('*', (req, res) => {
