@@ -1,10 +1,10 @@
 
-<html onload="httpscheck()">
+<html>
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     </head>
-    <body>
+    <body onload="httpscheck()">
         <div class="container">
             <div class="topbar">
                     <img src="https://i.imgur.com/UUFNpMd.png" class="TEM" style="width:13rem;">
@@ -28,9 +28,13 @@
 
 <script>
     async function httpscheck() {
-            console.log("httpscheck");
-            if (window.location.protocol != "https:")
-                window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+        // check for localhost
+        if(window.location.href.includes("localhost")){
+            return;
+        }
+        
+        else if (window.location.protocol != "https:")
+            window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
     }
 </script>
 
