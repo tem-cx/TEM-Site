@@ -175,7 +175,8 @@
                 ownerList.push(obj)
             }
             var obj = {}
-            obj.startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
+            var startDateConvert = new Date(item.item.created_at)
+            obj.startDate = endDateConvert.getDate() + '/' + (endDateConvert.getMonth() + 1) + '/' + (endDateConvert.getFullYear())
             obj.endDate = 'Present'
             obj.playerUuid = item.item.currentOwner.playerUuid
             ownerList.push(obj)
