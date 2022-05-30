@@ -7,14 +7,13 @@
     <body>
         <div class="container">
             <div class="topbar">
-                    <img src="https://i.imgur.com/UUFNpMd.png" class="TEM" style="width:13rem;">
-                    <form action="/" method="POST">
-                        <input type="text" name="search" id="search" class="search" placeholder="Items And Players" required>
-                        <button type="submit" class="submit">Search</button>
-                    </form>
-                    <span class="material-icons">search</span>
-                
-            </div>
+                <img src="https://i.imgur.com/UUFNpMd.png" class="TEM" style="width:13rem;" draggable="false">
+                <form action="/" method="POST">
+                        <input type="text" name="search" id="search" class="search" placeholder="Items And Players"  required>
+                        <span class="material-icons">search</span>
+                    <button type="submit" class="submit">Search</button>
+                </form>
+        </div>
         
             <div class="main">
             
@@ -57,18 +56,27 @@ body{
     position: fixed;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;    
 }
+
+.Item{
+    position: absolute;
+    width: 60%;
+    height: 100%;
+
+}
 .tem{
     position: fixed;
     padding-left: 2rem;
     top: -4rem;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none; 
 }
 input{
-    position: absolute;
-    width: 25%;
+    position: relative;
+    width: 30rem;
     height: 2.5rem;
     border-radius: 10px;
-    margin-top: 1.3rem;
-    right: 10rem;
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     color: #EEEEEE;
@@ -78,20 +86,34 @@ input{
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 input:hover , input:focus{
     transition: all 0.2s ease-in-out;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
 }
+
 .topbar input::placeholder{
     color: #EEEEEE;
 }
-.topbar span{
+
+.search{
     position: absolute;
-    right: 37.5rem;
-    top: 1.65rem;
-    font-size: 1.9rem;
-    color: #EEEEEE;
+    right: 11rem;
+    top: 1.3rem;
+    padding: 1rem;
 }
+
+.topbar span{
+    float: right;
+    margin-right: 12rem;
+    margin-top: 1.6rem;
+    position: relative;
+    z-index: 2;
+    color: #EEEEEE;
+    font-size: 2rem;
+}
+
 button {
     top: 1.3rem;
     right: 1.5rem;
@@ -127,5 +149,4 @@ button:hover{
     color: #232931;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-
 </style>
