@@ -19,7 +19,7 @@
                     <form action="/" method="POST">
                             <input type="text" name="search" id="search" class="search" placeholder="Items And Players" value="<%=search%>" required>
                             <span class="material-icons">search</span>
-                        <button type="submit" class="submit">Search</button>
+                        <button type="submit"  class="submit">Search</button>
                     </form>
                 
             </div>
@@ -412,17 +412,20 @@ button:hover{
 
 .history div:not(.vline,.bmargin){
     position: relative;
-    display: block;
+    display: inline-block;
     top: 0rem;
     padding-left: 1.5vw;
     width: 35vw;
     margin-right: -1rem;
     padding-top: 1.5rem;
-    margin-left: 3rem;
+    padding-bottom: 1.5rem;
+
+    margin-left: 2rem;
     margin-top: 5rem;
     border-radius: 10px;
     background-color: #393E46;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    overflow-x: auto;
 }
 
 .history div:not(.vline,.bmargin):hover{
@@ -437,25 +440,26 @@ button:hover{
 }
 
 .history div p{
-    position: relative;
-    top: -7rem;
-    left: 10rem;
+    width: auto;
+    position: absolute;
+    top: 2rem;
+    left: 11rem;
     font-size: 2rem;
     font-weight: 750;
     color: #4ECCA3;
 }
 #start{
     position: absolute;
-    padding-top: 13.5rem;
-    left: 30rem;
+    padding-top: 0vh;
+    left: 27rem;
     font-size: 1.5rem;
     font-weight: 750;
     color: #4ECCA3;
 }
 #end{
     position: absolute;
-    padding-top: 10rem;
-    left: 30rem;
+    padding-top: 4.5rem;
+    left: 27rem;
     font-size: 1.5rem;
     font-weight: 750;
     color: #4ECCA3;
@@ -579,7 +583,7 @@ button:hover{
 }
 .ititle{
     position: absolute;
-    left:   15vw;
+    left: 15vw;
     top: 1vh;
     font-size: 2rem;
     font-weight: 1000;
@@ -604,10 +608,10 @@ button:hover{
 
 .binfoFrame{
     padding: 1rem;
-    position: absolute;
+    position: relative;
     top: 2vh;
-    left: 23vh;
-    width: 28vw;
+    left: 11.5vw;
+    width: 66%;
     height: 8vw;
     background-color: #232931;
     align-content: center;
