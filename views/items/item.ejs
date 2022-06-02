@@ -243,29 +243,30 @@
         }
         
 
-        for(i in ownerList){
-            let playerName = await getPlayerName(ownerList[i].playerUuid)
+        for(const ownerIndex in ownerList){
+            let playerName = await getPlayerName(ownerList[ownerIndex].playerUuid)
             let img = document.createElement('img')
             let pName = document.createElement('p')
             let pStart = document.createElement('p')
             let pEnd = document.createElement('p')
             let div = document.createElement('div')
             let href = document.createElement('a')
-            pStart.innerHTML = ownerList[i].startDate + '<span class="material-icons-outlined">file_download</span>'
-            pEnd.innerHTML = ownerList[i].endDate + '<span class="material-icons-outlined">file_upload</span>'
-            pStart.id = 'start'
-            pEnd.id = 'end'
-            div.id = [i]
+            let ownerId = "owner-" + ownerIndex
+            pStart.innerHTML = ownerList[ownerIndex].startDate + '<span class="material-icons-outlined">file_download</span>'
+            pEnd.innerHTML = ownerList[ownerIndex].endDate + '<span class="material-icons-outlined">file_upload</span>'
+            pStart.id = ownerId + '-start'
+            pEnd.id = ownerId + '-end'
+            div.id = ownerId
             pName.innerHTML = playerName.name
             href.href = 'https://sky.shiiyu.moe/stats/' + playerName.name
-            href.id = 'href' + [i]
-            img.src = 'https://mc-heads.net/avatar/' + ownerList[i].playerUuid 
+            href.id = 'href-' + ownerId
+            img.src = 'https://mc-heads.net/avatar/' + ownerList[ownerIndex].playerUuid
             document.getElementById('history').appendChild(div)
-            document.getElementById([i]).appendChild(href)
-            document.getElementById('href' + [i]).appendChild(img);
-            document.getElementById([i]).appendChild(pName);
-            document.getElementById([i]).appendChild(pEnd);
-            document.getElementById([i]).appendChild(pStart);
+            document.getElementById(div.id).appendChild(href)
+            document.getElementById(href.id).appendChild(img);
+            document.getElementById(div.id).appendChild(pName);
+            document.getElementById(div.id).appendChild(pEnd);
+            document.getElementById(div.id).appendChild(pStart);
         }
         let bmargin = document.createElement('div')
         bmargin.className = 'bmargin'
