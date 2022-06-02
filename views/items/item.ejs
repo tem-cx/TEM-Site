@@ -26,15 +26,23 @@
         
             <div class="main">
                 <div class="Item">
-                    <div class="itemdiscription">
+                    <h1 class="ititle" id="ititle">Item Discription</h1>
+                        <div class="itemdiscription">
+                            <div class="binfoFrame">
+                                    
+                            </div>
+
+                            <div class="itemFrame">
 
 
-                    </div>
+                            </div>
+
+                        </div>
                     <h1 class="etitle" id="etitle">Item Enchants</h1>
 
-                    <div class="enchantments" id="ebox">
+                        <div class="enchantments" id="ebox">
 
-                    </div>
+                        </div>
                 </div>
 
                 <div class="vline"></div>
@@ -97,10 +105,20 @@
         const itemName = itemInfo.itemId
         const enchantments = itemInfo.enchantments
 
+        //item img
+
         var itemImg = document.createElement('img')
         itemImg.src = 'https://sky.shiiyu.moe/item/' + itemName
         itemImg.className = 'itemImg'
-        document.getElementsByClassName('Item')[0].appendChild(itemImg)
+        document.getElementsByClassName('itemFrame')[0].appendChild(itemImg)
+
+        //item Name
+
+        var itemDName = document.createElement('p')
+        itemDName.innerHTML = itemInfo.friendlyName
+        itemDName.className = 'itemDName'
+        document.getElementsByClassName('binfoFrame')[0].appendChild(itemDName)
+
 
         if(Object.keys(enchantments).length === 0){
             const ebox = document.getElementById('ebox')
@@ -356,6 +374,7 @@ button:hover{
 
 
 
+
 /* history */
 
 .history{
@@ -372,6 +391,7 @@ button:hover{
     display: block;
     top: 0rem;
     padding-left: 1.5vw;
+    width: 35vw;
     margin-right: -1rem;
     padding-top: 1.5rem;
     margin-left: 3rem;
@@ -468,6 +488,24 @@ button:hover{
 
 /* items */
 
+.itemdiscription{
+    position: absolute;
+    top: 8.5vh;
+    left: 1vw;
+    width:42vw;
+    height: 82%;
+    border-radius: 15px;
+    overflow-y: auto;
+    overflow-x: auto;
+    background-color: #393E46;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.itemdiscription:hover{
+    transition: all 0.2s ease-in-out;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
 .enchantments{
     position: absolute;
     top: 8.5vh;
@@ -515,7 +553,79 @@ button:hover{
     font-weight: 1000;
     color: #EEEEEE;
 }
+.ititle{
+    position: absolute;
+    left:   15vw;
+    top: 1vh;
+    font-size: 2rem;
+    font-weight: 1000;
+    color: #EEEEEE;
+}
 
+.itemDname{
+    position: absolute;
+    left: 12vw;
+    top: 13vh;
+    font-size: 2.5rem;
+    font-weight: 1000;
+    color: #EEEEEE;
+}
+
+.binfoFrame{
+    padding: 1rem;
+    position: absolute;
+    top: 2vh;
+    left: 23vh;
+    width: 28vw;
+    height: 8vw;
+    background-color: #232931;
+    align-content: center;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: #4ECCA3;
+}
+
+.binfoFrame:hover{
+    transition: all 0.2s ease-in-out;
+    outline-color: #4ecca200;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.itemframe{
+    padding: 1rem;
+    position: absolute;
+    top: 2vh;
+    left: 2vh;
+    width: 8vw;
+    height: 8vw;
+    background-color: #232931;
+    align-content: center;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: #4ECCA3;
+}
+
+.itemframe:hover{
+    transition: all 0.2s ease-in-out;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    outline-color: #4ecca200;
+
+}
+
+.itemImg{
+    width: inherit;
+    height: inherit;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
 
 /* Footer */
 
