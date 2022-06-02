@@ -66,7 +66,9 @@
 <script>
 
     var stars = {"0":"","1":"✪","2":"✪✪","3":"✪✪✪","4":"✪✪✪✪","5":"✪✪✪✪✪","6":"✪✪✪✪✪➀","7":"✪✪✪✪✪➁","8":"✪✪✪✪✪➂","9":"✪✪✪✪✪➃","10":"✪✪✪✪✪➄"};
-    
+    var itemrarity = {"common":"0","uncommon":"1","rare":"2","epic":"3","legendary":"4","mythic":"5","divine":"6","special":"7","very_special":"8"};
+    var raritycolor = {"0":"#FFFFFF","1":"#55FF55","2":"#5555FF","3":"#AA00AA","4":"#FFAA00","5":"#FF55FF","6":"#55FFFF","7":"#FF5555","8":"#FF5555"};
+
     async function httpscheck() {
         // check for localhost
         if(window.location.href.includes("localhost")){
@@ -107,6 +109,15 @@
 
         //item img
 
+        async function getItemRarity(rarity){
+            const lowerrarity = rarity.toLowerCase();
+            let rarityvalue = itemrarity[lowerrarity]
+            if(itemInfo.extraAttributes.rarity_upgrades == '1'){
+                rarityvalue = parseInt(rarityvalue) + 1
+            }
+            return rarityvalue
+        }
+
         var itemImg = document.createElement('img')
         itemImg.src = 'https://sky.shiiyu.moe/item/' + itemName
         itemImg.className = 'itemImg'
@@ -114,10 +125,13 @@
 
         //item Name
 
+        var itemRarityNumber = await getItemRarity(itemInfo.rarity)
         var itemDName = document.createElement('p')
         itemDName.innerHTML = itemInfo.friendlyName
         itemDName.className = 'itemDName'
+        itemDName.style.color = raritycolor[itemRarityNumber]
         document.getElementsByClassName('binfoFrame')[0].appendChild(itemDName)
+
 
         //Stars
 
@@ -575,7 +589,6 @@ button:hover{
     top: 2vh;
     font-size: 2.5rem;
     font-weight: 1000;
-    color: #EEEEEE;
 }
 .itemStars{
     position: absolute;
