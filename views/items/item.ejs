@@ -65,9 +65,9 @@
 
 <script>
 
-    var stars = {"0":"","1":"✪","2":"✪✪","3":"✪✪✪","4":"✪✪✪✪","5":"✪✪✪✪✪","6":"✪✪✪✪✪➀","7":"✪✪✪✪✪➁","8":"✪✪✪✪✪➂","9":"✪✪✪✪✪➃","10":"✪✪✪✪✪➄"};
-    var itemrarity = {"common":"0","uncommon":"1","rare":"2","epic":"3","legendary":"4","mythic":"5","divine":"6","special":"7","very_special":"8"};
-    var raritycolor = {"0":"#FFFFFF","1":"#55FF55","2":"#5555FF","3":"#AA00AA","4":"#FFAA00","5":"#FF55FF","6":"#55FFFF","7":"#FF5555","8":"#FF5555"};
+    let stars = {"0":"","1":"✪","2":"✪✪","3":"✪✪✪","4":"✪✪✪✪","5":"✪✪✪✪✪","6":"✪✪✪✪✪➀","7":"✪✪✪✪✪➁","8":"✪✪✪✪✪➂","9":"✪✪✪✪✪➃","10":"✪✪✪✪✪➄"};
+    let itemrarity = {"common":"0","uncommon":"1","rare":"2","epic":"3","legendary":"4","mythic":"5","divine":"6","special":"7","very_special":"8"};
+    let raritycolor = {"0":"#FFFFFF","1":"#55FF55","2":"#5555FF","3":"#AA00AA","4":"#FFAA00","5":"#FF55FF","6":"#55FFFF","7":"#FF5555","8":"#FF5555"};
     let itemData = null;
     let itemProcessing = false;
 
@@ -81,7 +81,7 @@
             window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
     }
 
-    var itemOptions = {
+    let itemOptions = {
             method: 'GET',
             url: 'https://api.tem.cx/items/' + '<%=search%>',
             headers: {'Content-Type': 'application/json'}
@@ -131,15 +131,15 @@
             return rarityvalue
         }
 
-        var itemImg = document.createElement('img')
+        let itemImg = document.createElement('img')
         itemImg.src = 'https://sky.shiiyu.moe/item/' + itemName
         itemImg.className = 'itemImg'
         document.getElementsByClassName('itemFrame')[0].appendChild(itemImg)
 
         //item Name
 
-        var itemRarityNumber = await getItemRarity(itemInfo.rarity)
-        var itemDName = document.createElement('p')
+        let itemRarityNumber = await getItemRarity(itemInfo.rarity)
+        let itemDName = document.createElement('p')
         itemDName.innerHTML = itemInfo.friendlyName
         itemDName.className = 'itemDName'
         itemDName.style.color = raritycolor[itemRarityNumber]
@@ -149,7 +149,7 @@
         //Stars
 
         if(itemInfo.extraAttributes.dungeon_item_level != undefined){
-            var itemStars = document.createElement('p')
+            let itemStars = document.createElement('p')
             itemStars.innerHTML = stars[itemInfo.extraAttributes.dungeon_item_level]
             itemStars.className = 'itemStars'
             document.getElementsByClassName('binfoFrame')[0].appendChild(itemStars)
@@ -165,20 +165,18 @@
             return
         }
 
-        for(i in enchantments){
-            var enchantment = document.createElement("p")
-            var enchantmentLevel = document.createElement("p")
-            enchantmentLevel.innerHTML = enchantments[i]
+        for(const enchantName in enchantments){
+            let enchantment = document.createElement("p")
+            let enchantmentLevel = document.createElement("p")
+            enchantmentLevel.innerHTML = enchantments[enchantName]
             enchantmentLevel.className = 'enchantmentLevel'
             enchantment.className = 'enchantment'
-            enchantment.id = i = i.replace('_', ' ')
+            let formattedEnchantName = enchantName.replace('_', ' ')
+            enchantment.id = formattedEnchantName
             //i = i.replace('_', ' ')
-            enchantment.innerHTML = i + ': '
+            enchantment.innerHTML = formattedEnchantName + ': '
             document.getElementsByClassName('enchantments')[0].appendChild(enchantment)
-            document.getElementById(i).appendChild(enchantmentLevel)
-
-
-
+            document.getElementById(formattedEnchantName).appendChild(enchantmentLevel)
         }
     }
 
@@ -190,17 +188,17 @@
 
 
         if(previousOwners.length === 0){
-                var startDateConvert = new Date(item.item.created_at)
+                let startDateConvert = new Date(item.item.created_at)
                 let startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
                 let owneruuid = item.item.currentOwner.playerUuid
                 let playerName = await getPlayerName(owneruuid)
 
-                var img = document.createElement('img')
-                var pName = document.createElement('p')
-                var pStart = document.createElement('p')
-                var pEnd = document.createElement('p')
-                var div = document.createElement('div')
-                var href = document.createElement('a')
+                let img = document.createElement('img')
+                let pName = document.createElement('p')
+                let pStart = document.createElement('p')
+                let pEnd = document.createElement('p')
+                let div = document.createElement('div')
+                let href = document.createElement('a')
 
                 pStart.innerHTML = startDate + '<span class="material-icons-outlined">file_download</span>'
                 pEnd.innerHTML = 'Not Been Traded' + '<span class="material-icons-outlined">file_upload</span>'
@@ -219,25 +217,25 @@
                 document.getElementById('owner').appendChild(pEnd);
                 document.getElementById('owner').appendChild(pStart);
             
-                var bmargin = document.createElement('div')
+                let bmargin = document.createElement('div')
                 bmargin.className = 'bmargin'
                 document.getElementById('history').appendChild(bmargin)  
         }
 
     
         else{
-            for(i in previousOwners){
-                var obj = {}
-                var startDateConvert = new Date(previousOwners[i].start)
-                var endDateConvert = new Date(previousOwners[i].end)
+            let startDateConvert = new Date(item.item.created_at)
+            for(const ownerUuid in previousOwners){
+                let obj = {}
+                startDateConvert = new Date(previousOwners[ownerUuid].start)
+                let endDateConvert = new Date(previousOwners[ownerUuid].end)
                 obj.startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
                 obj.endDate = endDateConvert.getDate() + '/' + (endDateConvert.getMonth() + 1) + '/' + (endDateConvert.getFullYear())
-                obj.playerUuid = previousOwners[i].owner.playerUuid
+                obj.playerUuid = previousOwners[ownerUuid].owner.playerUuid
                 ownerList.push(obj)
             }
-            var obj = {}
-            var startDateConvert = new Date(item.item.created_at)
-            obj.startDate = endDateConvert.getDate() + '/' + (endDateConvert.getMonth() + 1) + '/' + (endDateConvert.getFullYear())
+            let obj = {}
+            obj.startDate = startDateConvert.getDate() + '/' + (startDateConvert.getMonth() + 1) + '/' + (startDateConvert.getFullYear())
             obj.endDate = 'Present'
             obj.playerUuid = item.item.currentOwner.playerUuid
             ownerList.push(obj)
@@ -247,12 +245,12 @@
 
         for(i in ownerList){
             let playerName = await getPlayerName(ownerList[i].playerUuid)
-            var img = document.createElement('img')
-            var pName = document.createElement('p')
-            var pStart = document.createElement('p')
-            var pEnd = document.createElement('p')
-            var div = document.createElement('div')
-            var href = document.createElement('a')
+            let img = document.createElement('img')
+            let pName = document.createElement('p')
+            let pStart = document.createElement('p')
+            let pEnd = document.createElement('p')
+            let div = document.createElement('div')
+            let href = document.createElement('a')
             pStart.innerHTML = ownerList[i].startDate + '<span class="material-icons-outlined">file_download</span>'
             pEnd.innerHTML = ownerList[i].endDate + '<span class="material-icons-outlined">file_upload</span>'
             pStart.id = 'start'
@@ -269,7 +267,7 @@
             document.getElementById([i]).appendChild(pEnd);
             document.getElementById([i]).appendChild(pStart);
         }
-        var bmargin = document.createElement('div')
+        let bmargin = document.createElement('div')
         bmargin.className = 'bmargin'
         document.getElementById('history').appendChild(bmargin)  
         
