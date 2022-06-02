@@ -68,6 +68,8 @@
     var stars = {"0":"","1":"✪","2":"✪✪","3":"✪✪✪","4":"✪✪✪✪","5":"✪✪✪✪✪","6":"✪✪✪✪✪➀","7":"✪✪✪✪✪➁","8":"✪✪✪✪✪➂","9":"✪✪✪✪✪➃","10":"✪✪✪✪✪➄"};
     var itemrarity = {"common":"0","uncommon":"1","rare":"2","epic":"3","legendary":"4","mythic":"5","divine":"6","special":"7","very_special":"8"};
     var raritycolor = {"0":"#FFFFFF","1":"#55FF55","2":"#5555FF","3":"#AA00AA","4":"#FFAA00","5":"#FF55FF","6":"#55FFFF","7":"#FF5555","8":"#FF5555"};
+    let itemData = null;
+    let itemProcessing = false;
 
     async function httpscheck() {
         // check for localhost
@@ -86,11 +88,22 @@
     }
 
     async function getItem() {
-            let item = ''
-                await axios.request(itemOptions).then(function (response) {
-                    item = response.data
-                })
-            return item
+        let attempts = 0;
+        while (itemProcessing) {
+            if (attempts > 5) {
+                return {}
+            }
+            await new Promise(r => setTimeout(r, 1000));
+            attempts++
+        }
+        if (itemData == null) {
+            itemProcessing = true;
+            await axios.request(itemOptions).then(function (response) {
+                itemData = response.data
+            })
+            itemProcessing = false;
+        }
+        return itemData
     }
 
     async function getPlayerName(id) {
