@@ -247,6 +247,7 @@
             let playerName = await getPlayerName(ownerList[ownerIndex].playerUuid)
             let img = document.createElement('img')
             let pName = document.createElement('p')
+            pName.classList.add("formattedParagraph")
             let pStart = document.createElement('p')
             let pEnd = document.createElement('p')
             let div = document.createElement('div')
@@ -255,7 +256,9 @@
             pStart.innerHTML = ownerList[ownerIndex].startDate + '<span class="material-icons-outlined">file_download</span>'
             pEnd.innerHTML = ownerList[ownerIndex].endDate + '<span class="material-icons-outlined">file_upload</span>'
             pStart.id = ownerId + '-start'
+            pStart.classList.add("startDate")
             pEnd.id = ownerId + '-end'
+            pEnd.classList.add("endDate")
             div.id = ownerId
             pName.innerHTML = playerName.name
             href.href = 'https://sky.shiiyu.moe/stats/' + playerName.name
@@ -451,7 +454,7 @@ button:hover{
 
 }
 
-.history div p{
+.history div .formattedParagraph {
     width: auto;
     position: absolute;
     top: 2rem;
@@ -460,25 +463,30 @@ button:hover{
     font-weight: 750;
     color: #4ECCA3;
 }
-#start{
+
+.history div p {
+    width: auto;
+    top: 2rem;
+}
+
+.startDate {
     position: absolute;
     padding-top: 0vh;
-    left: 27rem;
+    left: 30rem;
     font-size: 1.5rem;
     font-weight: 750;
     color: #4ECCA3;
 }
-#end{
+.endDate {
     position: absolute;
     padding-top: 4.5rem;
-    left: 27rem;
+    left: 30rem;
     font-size: 1.5rem;
     font-weight: 750;
     color: #4ECCA3;
 }
 
-
-#start span{
+.startDate span{
     position: relative;
     color: #EEEEEE;
     font-size: 2rem;
@@ -486,7 +494,7 @@ button:hover{
     left: 0.2rem;
 }
 
-#end span{
+.endDate span{
     position: relative;
     color: #EEEEEE;
     font-size: 2rem;
