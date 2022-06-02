@@ -135,10 +135,13 @@
 
         //Stars
 
-        var itemStars = document.createElement('p')
-        itemStars.innerHTML = stars[itemInfo.extraAttributes.dungeon_item_level]
-        itemStars.className = 'itemStars'
-        document.getElementsByClassName('binfoFrame')[0].appendChild(itemStars)
+        if(itemInfo.extraAttributes.dungeon_item_level != undefined){
+            var itemStars = document.createElement('p')
+            itemStars.innerHTML = stars[itemInfo.extraAttributes.dungeon_item_level]
+            itemStars.className = 'itemStars'
+            document.getElementsByClassName('binfoFrame')[0].appendChild(itemStars)
+        }
+
 
 
         if(Object.keys(enchantments).length === 0){
