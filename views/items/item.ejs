@@ -65,7 +65,7 @@
 
 <script>
 
-    var stars = {"1":"✪","2":"✪✪","3":"✪✪✪","4":"✪✪✪✪","5":"✪✪✪✪✪","6":"✪✪✪✪✪➀","7":"✪✪✪✪✪➁","8":"✪✪✪✪✪➂","9":"✪✪✪✪✪➃","10":"✪✪✪✪✪➄"};
+    var stars = {"0":"","1":"✪","2":"✪✪","3":"✪✪✪","4":"✪✪✪✪","5":"✪✪✪✪✪","6":"✪✪✪✪✪➀","7":"✪✪✪✪✪➁","8":"✪✪✪✪✪➂","9":"✪✪✪✪✪➃","10":"✪✪✪✪✪➄"};
     
     async function httpscheck() {
         // check for localhost
@@ -118,6 +118,13 @@
         itemDName.innerHTML = itemInfo.friendlyName
         itemDName.className = 'itemDName'
         document.getElementsByClassName('binfoFrame')[0].appendChild(itemDName)
+
+        //Stars
+
+        var itemStars = document.createElement('p')
+        itemStars.innerHTML = stars[itemInfo.extraAttributes.dungeon_item_level]
+        itemStars.className = 'itemStars'
+        document.getElementsByClassName('binfoFrame')[0].appendChild(itemStars)
 
 
         if(Object.keys(enchantments).length === 0){
@@ -564,10 +571,18 @@ button:hover{
 
 .itemDname{
     position: absolute;
-    left: 12vw;
-    top: 13vh;
+    left: 1vw;
+    top: 2vh;
     font-size: 2.5rem;
     font-weight: 1000;
+    color: #EEEEEE;
+}
+.itemStars{
+    position: absolute;
+    left: 1.1vw;
+    top: 6.5vh;
+    font-size: 1.5rem;
+    font-weight: 500;
     color: #EEEEEE;
 }
 
