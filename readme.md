@@ -5,11 +5,13 @@ This is the official GitHub for the TEM website, Open source, and available for 
 ## Information
 
 Made using :
-> Express JS 
+
+> Express JS
 
 > Node JS
 
 API Used :
+
 > [COFL API](https://sky.coflnet.com/api/index.html)
 
 > [TEM API](https://api.tem.cx/)
@@ -25,28 +27,35 @@ To install navigate into the main folder and run the command :
 ```bash
 > npm i
 ```
+
 Create a .env file with a variable called :
+
 ```bash
 SESSION_SECRET=[Your Secret Here]
 ```
+
 This can be whatever you want
 
 ## Usage
 
 To run the website use the command:
+
 ```bash
 > npm run dev
 ```
 
 Or alternatively:
+
 ```javascript
 > node server.js
 ```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
