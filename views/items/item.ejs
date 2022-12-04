@@ -321,7 +321,7 @@
       bmargin.className = "bmargin";
       document.getElementById("history").appendChild(bmargin);
     } else {
-      let startDateConvert = new Date(item.item.created_at);
+      let startDateConvert;
       for (const ownerUuid in previousOwners) {
         let obj = {};
         startDateConvert = new Date(previousOwners[ownerUuid].start);
@@ -342,6 +342,7 @@
         ownerList.push(obj);
       }
       let obj = {};
+      startDateConvert = new Date(item.item.start);
       obj.startDate =
         startDateConvert.getDate() +
         "/" +
